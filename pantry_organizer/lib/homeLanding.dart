@@ -13,6 +13,9 @@ class HomeLanding extends StatefulWidget {
 }
 
 class _HomeLandingState extends State<HomeLanding> {
+  final user = FirebaseAuth.instance.currentUser!;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +23,12 @@ class _HomeLandingState extends State<HomeLanding> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('testing home page'),
+            Text('testing home page, currently signed on as: ' + user.email!),
             MaterialButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
               },
-              color: Colors.deepOrange[300],
+              color: Colors.indigo[700],
               child: 
               Text('sign out'),
             )

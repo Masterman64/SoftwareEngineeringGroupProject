@@ -1,29 +1,25 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, avoid_print, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginLanding extends StatefulWidget {
-  const LoginLanding({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  final VoidCallback showRegisterPage;
+  const LoginPage({Key? key, required this.showRegisterPage}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginState extends State<LoginLanding> {
-  // login controllers
+class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
+   FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text.trim());
   }
 
-  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -49,7 +45,7 @@ class _LoginState extends State<LoginLanding> {
 
               // welcome message
               Text(
-                'Welcome back!',
+                'Welcome Back!',
                 style: GoogleFonts.roboto(
                   fontSize: 30,
                 ),
@@ -78,6 +74,7 @@ class _LoginState extends State<LoginLanding> {
                 ),
               ),
               SizedBox(height: 10),
+
               // password textfield login
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -100,7 +97,7 @@ class _LoginState extends State<LoginLanding> {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 10),
 
               // sign in button
               Padding(
@@ -135,25 +132,19 @@ class _LoginState extends State<LoginLanding> {
                     'Not signed up?',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    ' Register now!',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: widget.showRegisterPage,
+                    child: Text(
+                      ' Register Here',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   )
                 ],
               ),
               SizedBox(height: 0),
-
-              // possibly register w/ apple and google?
-              Padding(
-                padding: const EdgeInsets.all(50),
-                child: SignInWithAppleButton(
-                    text: 'Sign up with Apple', onPressed: () {}),
-              )
-            ],
-          ),
-        ))));
+            ])))));
   }
 }
