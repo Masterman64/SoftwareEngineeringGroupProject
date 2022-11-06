@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, avoid_print, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, avoid_print, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, unused_field
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,26 +15,40 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _ageController = TextEditingController();
+  final _dietaryController = TextEditingController();
+
+  Future signUp() async {
+    if(passwordConfirmation()){
+      // creates user
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(), 
+        password: _passwordController.text.trim(),
+      );
+
+      // add userinfo
+      addUserInfo(_emailController.text.trim(), int.parse(_ageController.text.trim()), _dietaryController.text.trim());
+    } else {
+      
+    }
+  }
+
+  Future addUserInfo(String email, int age, String dietaryConditions) async {
+    await FirebaseFirestore.instance.collection('userinfo').add({
+      'email': email,
+      'age': age,
+      'dietary conditions': dietaryConditions
+    });
+  }
+
   bool passwordConfirmation () {
     if (_passwordController.text.trim() == _confirmPasswordController.text.trim()){
       return true;
     } else {
       return false;
-    }
-  }
-
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-
-  Future signUp() async {
-    if(passwordConfirmation()){
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: _emailController.text.trim(), 
-      password: _passwordController.text.trim(),
-      );
-    } else {
-      
     }
   }
 
@@ -53,18 +68,11 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // some kind of logo
-              Icon(
-                Icons.rice_bowl_sharp,
-                size: 75,
-              ),
-              SizedBox(height: 50),
-
               // welcome message
               Text(
-                'register page testing xd',
+                'Sign up here!',
                 style: GoogleFonts.roboto(
-                  fontSize: 30,
+                  fontSize: 52,
                 ),
               ),
               SizedBox(height: 50),
@@ -133,6 +141,52 @@ class _RegisterPageState extends State<RegisterPage> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Confirm Password',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+
+              //age textfield
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[500],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      controller: _ageController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Age',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+
+              // dietary conditions textfield
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[500],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      controller: _dietaryController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Dietary Conditions (separate with a "," or NA if none)',
                       ),
                     ),
                   ),
