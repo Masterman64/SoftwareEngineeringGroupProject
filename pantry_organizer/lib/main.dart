@@ -22,8 +22,13 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.light().copyWith(
-            primary: Colors
-                .purple), // easily the best line of code out of this whole damn thing 😎
+          primary: Color.fromARGB(255, 67, 250,
+              91), // easily the best line of code out of this whole damn thing 😎
+          primaryContainer: Color.fromARGB(255, 73, 173, 86),
+          secondary: Color.fromARGB(255, 250, 238, 92),
+          secondaryContainer: Color.fromARGB(255, 173, 166, 73),
+          tertiary: Color.fromARGB(255, 225, 80, 250),
+        ),
       ),
       home: MainPage(),
     );
