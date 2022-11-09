@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, avoid_print, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, unused_field
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, avoid_print, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, unused_field, prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,7 +40,9 @@ class _RegisterPageState extends State<RegisterPage> {
     await FirebaseFirestore.instance.collection('userinfo').add({
       'email': email,
       'age': age,
-      'dietary conditions': dietaryConditions
+      'dietary conditions': dietaryConditions,
+      'about': null,
+      'image url': null, 
     });
   }
 
@@ -55,6 +57,9 @@ class _RegisterPageState extends State<RegisterPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _ageController.dispose();
+    _dietaryController.dispose();
     super.dispose();
   }
 
