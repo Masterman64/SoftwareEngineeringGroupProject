@@ -12,11 +12,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
+    //const user = UserPreferences.myUser;
 
     return Scaffold(
       appBar: CustomAppBar(context),
-      body: ListView(
+      /*body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
           ProfileWidget(
@@ -38,12 +38,12 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Text('sign out'),
           ),
         ],
-      ),
+      ),*/
     );
   }
 
   Widget buildName(User user) => Column(
-        children: [
+      /*children: [
           Text(
             user.name,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
@@ -53,7 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
             user.email,
             style: TextStyle(color: Colors.grey),
           )
-        ],
+        ],*/
       );
   Widget buildAbout(User user) => Container(
         padding: EdgeInsets.symmetric(horizontal: 48),
@@ -65,10 +65,10 @@ class _ProfilePageState extends State<ProfilePage> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            Text(
+            /*Text(
               user.about,
               style: TextStyle(fontSize: 16, height: 1.4),
-            ),
+            ),*/
           ],
         ),
       );

@@ -39,7 +39,7 @@ class Pantry extends StatelessWidget {
                   ),
                 ),
               ),
-              ElevatedButton(
+              /*ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -48,19 +48,19 @@ class Pantry extends StatelessWidget {
                     ),
                   );
                 },
-                child:
+                child:*/
+              // ignore: prefer_const_constructors
+              CircleAvatar(
+                  backgroundColor: Colors.black,
+                  radius: 70,
+                  // ignore: prefer_const_constructors
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 68,
                     // ignore: prefer_const_constructors
-                    CircleAvatar(
-                        backgroundColor: Colors.black,
-                        radius: 70,
-                        // ignore: prefer_const_constructors
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 68,
-                          // ignore: prefer_const_constructors
-                          child: Text("Refridgerator"),
-                        )),
-              ),
+                    child: Text("Refridgerator"),
+                  )),
+              //),
             ],
           ),
         ),

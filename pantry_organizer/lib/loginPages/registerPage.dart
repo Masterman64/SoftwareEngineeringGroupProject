@@ -14,7 +14,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -22,30 +21,29 @@ class _RegisterPageState extends State<RegisterPage> {
   final _dietaryController = TextEditingController();
 
   Future signUp() async {
-    if(passwordConfirmation()){
+    if (passwordConfirmation()) {
       // creates user
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(), 
+        email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
       // add userinfo
-      addUserInfo(_emailController.text.trim(), int.parse(_ageController.text.trim()), _dietaryController.text.trim());
-    } else {
-      
-    }
+      addUserInfo(
+          _emailController.text.trim(),
+          int.parse(_ageController.text.trim()),
+          _dietaryController.text.trim());
+    } else {}
   }
 
   Future addUserInfo(String email, int age, String dietaryConditions) async {
-    await FirebaseFirestore.instance.collection('userinfo').add({
-      'email': email,
-      'age': age,
-      'dietary conditions': dietaryConditions
-    });
+    await FirebaseFirestore.instance.collection('userinfo').add(
+        {'email': email, 'age': age, 'dietary conditions': dietaryConditions});
   }
 
-  bool passwordConfirmation () {
-    if (_passwordController.text.trim() == _confirmPasswordController.text.trim()){
+  bool passwordConfirmation() {
+    if (_passwordController.text.trim() ==
+        _confirmPasswordController.text.trim()) {
       return true;
     } else {
       return false;
@@ -61,13 +59,13 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[850],
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: SafeArea(
             child: Center(
                 child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
               // welcome message
               Text(
                 'Sign up here!',
@@ -186,7 +184,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _dietaryController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Dietary Conditions (separate with a "," or NA if none)',
+                        hintText:
+                            'Dietary Conditions (separate with a "," or NA if none)',
                       ),
                     ),
                   ),
@@ -202,7 +201,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Container(
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.green[900],
+                        color: Theme.of(context).colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
