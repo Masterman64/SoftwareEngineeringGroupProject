@@ -42,7 +42,6 @@ class _HomeLandingState extends State<HomeLanding> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
             child: GNav(
-              backgroundColor: Colors.black,
               color: Colors.white70,
               gap: 5,
               padding: EdgeInsets.all(16),
