@@ -17,6 +17,13 @@ class ProfilePage extends StatelessWidget {
           children: [
             buildCoverImage(),
             Positioned(top: top, child: buildProfileImage()),
+            MaterialButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              color: Theme.of(context).colorScheme.primaryContainer,
+              child: Text('Sign out'),
+            )
           ]),
     );
   }
