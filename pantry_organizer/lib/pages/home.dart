@@ -10,6 +10,7 @@ class ProfileHome extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          backgroundColor: Colors.green,
           title: Text(
             'Home',
             style: TextStyle(

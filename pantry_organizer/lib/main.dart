@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:pantry_organizer/firebase_options.dart';
 import 'package:pantry_organizer/mainPage.dart';
-import 'homeLanding.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
