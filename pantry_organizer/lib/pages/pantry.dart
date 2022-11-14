@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:pantry_organizer/pages/home.dart';
-import 'package:pantry_organizer/pages/subpages/groupPage.dart';
 
 class Pantry extends StatelessWidget {
   static const String page1 = '/pantry';

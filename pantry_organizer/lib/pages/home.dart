@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:pantry_organizer/pages/pantry.dart';
 import 'package:pantry_organizer/pages/profile.dart';
 import 'package:pantry_organizer/pages/refrigerator.dart';
@@ -9,9 +8,23 @@ class ProfileHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Home Page testing'),
-    );
+    return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'Home',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        body: ListView(
+          children: [
+            Center(
+              child: Text('Home Page testing'),
+            )
+          ],
+        ));
   }
 }
 

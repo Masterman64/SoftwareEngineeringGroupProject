@@ -1,8 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pantry_organizer/utils/UserPreferences.dart';
-import 'package:pantry_organizer/widget/AppBar.dart';
-import 'package:pantry_organizer/widget/profile_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -14,32 +11,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     //const user = UserPreferences.myUser;
 
-    return Scaffold(
-      appBar: CustomAppBar(context),
-      /*body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath: user.imagePath,
-            onClicked: () async {},
-          ),
-          const SizedBox(height: 24),
-          buildName(user),
-          const SizedBox(height: 24),
-          Center(child: buildUpgradeButton()),
-          const SizedBox(height: 24),
-          NumbersWidget(),
-          const SizedBox(height: 48),
-          buildAbout(user),
-          MaterialButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-            child: Text('sign out'),
-          ),
-        ],
-      ),*/
-    );
+    return Scaffold();
   }
 
   Widget buildName(User user) => Column(
