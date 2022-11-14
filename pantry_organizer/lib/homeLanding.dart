@@ -23,8 +23,6 @@ class _HomeLandingState extends State<HomeLanding> {
     });
   }
 
-  final List<Widget> _pages = <Widget>[Home(), Pantry(), ProfilePage()];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
