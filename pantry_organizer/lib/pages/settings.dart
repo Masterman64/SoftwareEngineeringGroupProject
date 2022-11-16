@@ -27,7 +27,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   bool isLoading = false;
 
   final _changeEmailController = TextEditingController();
-  final _changeAgeController = TextEditingController();
+  final _changeDateOfBirthController = TextEditingController();
   final _changeDietCondController = TextEditingController();
   final _changeAboutController = TextEditingController();
 
@@ -63,32 +63,34 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     });
   }
 
-  Future saveProfileChanges(String email, String uid, String about, String dietConditions, int age) async {
-
+  Future saveProfileChanges(String email, String uid, String about,
+      String dietConditions, DateTime dateOfBirth) async {
     // update user model w/ new changes
     model.User user = model.User(
-      email: email,
-      uid: uid,
-      imageUrl: "",
-      about: about,
-      dietConditions: dietConditions,
-      age: age
-    );
+        accountCreationTime: userData?['accountCreationTime'],
+        email: email,
+        uid: uid,
+        imageUrl: "",
+        about: about,
+        dietConditions: dietConditions,
+        dateOfBirth: dateOfBirth);
 
     // save changes into the database
-    await FirebaseFirestore.instance.collection('userinfo')
-      .doc(uid).set(user.toJson());
+    await FirebaseFirestore.instance
+        .collection('userinfo')
+        .doc(uid)
+        .set(user.toJson());
 
     // update our email with firebaseauth so we can sign in with our new email
     FirebaseAuth.instance.currentUser!.updateEmail(email);
 
     // send message to let user know their details have been saved
     ScaffoldMessenger.of(context)
-      .showSnackBar(SnackBar(content: Text('Successfully saved changes')));
+        .showSnackBar(SnackBar(content: Text('Successfully saved changes')));
   }
 
   Future changePassword(String newPassword) async {
-    if(changePasswordConfirmation()){
+    if (changePasswordConfirmation()) {
       FirebaseAuth.instance.currentUser!.updatePassword(newPassword);
     }
   }
@@ -97,9 +99,9 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     FirebaseAuth.instance.signOut();
   }
 
-  bool changePasswordConfirmation(){
-    if(_newPasswordController.text.trim() == 
-    _newPasswordConfirmationController.text.trim()){
+  bool changePasswordConfirmation() {
+    if (_newPasswordController.text.trim() ==
+        _newPasswordConfirmationController.text.trim()) {
       return true;
     } else {
       return false;
@@ -198,7 +200,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         ),
                         padding: const EdgeInsets.only(left: 10.0),
                         child: TextField(
-                          controller: _changeAgeController,
+                          controller: _changeDateOfBirthController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: userData?['age'].toString() ?? '',
@@ -252,12 +254,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: InkWell(
                         onTap: () => saveProfileChanges(
-                          _changeEmailController.text,
-                          FirebaseAuth.instance.currentUser!.uid,
-                          _changeAboutController.text,
-                          _changeDietCondController.text,
-                          int.parse(_changeAgeController.text)
-                        ),
+                            _changeEmailController.text,
+                            FirebaseAuth.instance.currentUser!.uid,
+                            _changeAboutController.text,
+                            _changeDietCondController.text,
+                            DateTime.parse(_changeDateOfBirthController.text)),
                         child: Container(
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
@@ -333,8 +334,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: InkWell(
                         onTap: () => changePassword(
-                          _newPasswordConfirmationController.text.trim()
-                        ),
+                            _newPasswordConfirmationController.text.trim()),
                         child: Container(
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(

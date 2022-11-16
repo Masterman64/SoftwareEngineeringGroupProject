@@ -24,11 +24,17 @@ class _RegisterPageState extends State<RegisterPage> {
   final _confirmPasswordController = TextEditingController();
   final _aboutController = TextEditingController();
   final _dietController = TextEditingController();
-  final _ageController = TextEditingController();
+  final _dateOfBirthController = TextEditingController();
   final String _pickedImage = "";
 
-  Future signUp(String email, String password, String image, String about,
-      String dietConditions, int age) async {
+  Future signUp(
+      String email,
+      String password,
+      String image,
+      String about,
+      String dietConditions,
+      DateTime dateOfBirth,
+      DateTime accountCreationTime) async {
     if (passwordConfirmation()) {
       // creates user
       UserCredential userCred = await FirebaseAuth.instance
@@ -38,12 +44,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
       // add userinfo into our User model
       model.User user = model.User(
+          accountCreationTime: accountCreationTime,
           email: email,
           uid: userCred.user!.uid,
           imageUrl: "",
           about: about,
           dietConditions: dietConditions,
-          age: age);
+          dateOfBirth: dateOfBirth);
 
       // add user to the database
       await FirebaseFirestore.instance
@@ -84,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
-    _ageController.dispose();
+    _dateOfBirthController.dispose();
     _dietController.dispose();
     super.dispose();
   }
@@ -195,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 10),
 
-              //age textfield
+              //DOB textfield
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
@@ -206,19 +213,22 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
-                    child: TextField(
-                      controller: _ageController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Age',
-                      ),
+                    child: Column(
+                      children: <Widget>[
+                        TextField(
+                            controller: _dateOfBirthController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Date of Birth',
+                            ))
+                      ],
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 10),
 
-              // about textfield
+              // description textfield
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
@@ -233,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _aboutController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'About',
+                        hintText: 'About You',
                       ),
                     ),
                   ),
@@ -275,7 +285,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       _pickedImage,
                       _aboutController.text,
                       _dietController.text,
-                      int.parse(_ageController.text)),
+                      DateTime.parse(_dateOfBirthController.text),
+                      DateTime.now()),
                   child: Container(
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(

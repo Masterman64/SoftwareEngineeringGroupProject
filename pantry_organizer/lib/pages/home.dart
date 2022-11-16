@@ -20,8 +20,11 @@ class ProfileHome extends StatelessWidget {
           ),
         ),
         body: ListView(
+          // ignore: prefer_const_literals_to_create_immutables
           children: [
+            // ignore: prefer_const_constructors
             Center(
+              // ignore: prefer_const_constructors
               child: Text('Home Page testing'),
             )
           ],
