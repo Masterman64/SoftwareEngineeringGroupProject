@@ -285,7 +285,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       _pickedImage,
                       _aboutController.text,
                       _dietController.text,
-                      DateTime.parse(_dateOfBirthController.text),
+                      //DateTime.parse(_dateOfBirthController.text.replaceAll("/", "-")),
+                      DateTime.now(),
                       DateTime.now()),
                   child: Container(
                       padding: EdgeInsets.all(20),

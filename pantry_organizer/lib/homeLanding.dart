@@ -26,13 +26,6 @@ class _HomeLandingState extends State<HomeLanding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Pantry Organizer',
-          style: TextStyle(color: Colors.white, fontSize: 20.0),
-        ),
-        centerTitle: true,
-      ),
       body: pages[_selectedIndex],
 
       // bottom navigation bar

@@ -30,7 +30,6 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   final _changeDateOfBirthController = TextEditingController();
   final _changeDietCondController = TextEditingController();
   final _changeAboutController = TextEditingController();
-
   final _newPasswordController = TextEditingController();
   final _newPasswordConfirmationController = TextEditingController();
 
@@ -53,6 +52,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
           .get();
 
       userData = userDetails.data();
+
       setState(() {});
     } catch (e) {
       ScaffoldMessenger.of(context)
