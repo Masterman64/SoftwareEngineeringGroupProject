@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "303276218464",
+    "project_id": "seproject-group10-f7a99",
+    "storage_bucket": "seproject-group10-f7a99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303276218464:android:6b5b293e0e4dc61fe9cb05",
+        "android_client_info": {
+          "package_name": "com.example.pantry_organizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303276218464-e2dmk16k8kp46j2l7idsdduh2vimd4fc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkvngFHGo9l6STh12TDeTg7UUjUVEE38o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303276218464-e2dmk16k8kp46j2l7idsdduh2vimd4fc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "303276218464-rro23hv7tvmosjpmn4dlrvp02cm7ouib.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pantryOrganizer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
