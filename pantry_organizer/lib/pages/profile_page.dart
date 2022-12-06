@@ -31,7 +31,9 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          // ignore: prefer_const_literals_to_create_immutables
           children: [
+            // ignore: prefer_const_constructors
             Text(
               'About',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
